@@ -1,0 +1,10 @@
+.Invalid {
+    border: 1px solid red;
+    background-color: #fda49a;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+  }
+  
+  
