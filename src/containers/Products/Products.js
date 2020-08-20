@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import tempImg from "../../assets/images/iphone.png";
+import Pagination from "../../components/Pagination/Pagination";
 
-const products = () => {
+const Products = () => {
+  const [paginationDataState, setpaginationDataState] = useState({
+    pageSize: 5,
+    maxProductsCount: 20,
+    currentPage: 1,
+  });
+  const paginationChangeHandler = (pageNo) => {
+    console.log(pageNo);
+  };
   return (
     <div id="page-content" className="single-page">
       <div className="container">
@@ -373,23 +382,12 @@ const products = () => {
               </div>
             </div>
             <div className="row text-center">
-              <ul className="pagination">
-                <li className="active">
-                  <Link to="#">1</Link>
-                </li>
-                <li>
-                  <Link to="#">2</Link>
-                </li>
-                <li>
-                  <Link to="#">3</Link>
-                </li>
-                <li>
-                  <Link to="#">4</Link>
-                </li>
-                <li>
-                  <Link to="#">5</Link>
-                </li>
-              </ul>
+              <Pagination
+                maxProductsCount={paginationDataState.maxProductsCount}
+                pageSize={paginationDataState.pageSize}
+                currentPage={paginationDataState.currentPage}
+                paginationChangeHandler={paginationChangeHandler}
+              />
             </div>
           </div>
           <div id="sidebar" className="col-md-4">
@@ -560,4 +558,4 @@ const products = () => {
   );
 };
 
-export default products;
+export default Products;
