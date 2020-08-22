@@ -45,6 +45,11 @@ const input = (props) => {
   }
   return (
     <div className="form-group">
+      {props.label && (
+        <label className="control-label col-sm-2" htmlFor={props.label}>
+          {props.label}:
+        </label>
+      )}
       <div className="col-sm-10">
         {inputElement}
 

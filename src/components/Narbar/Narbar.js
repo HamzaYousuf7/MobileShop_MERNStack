@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import mainLogo from "../../assets/images/logo.png";
 const navbar = () => {
@@ -12,6 +12,9 @@ const navbar = () => {
             <div className="col-xs-6">
               <ul className="top-link">
                 <li>
+                  <NavLink to="/admin/addNewProduct">
+                    <span className="glyphicon glyphicon-user"></span> My TEST
+                  </NavLink>
                   <NavLink to="/userLogOrSing">
                     <span className="glyphicon glyphicon-user"></span> My
                     Account
@@ -76,7 +79,11 @@ const navbar = () => {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li className="dropdown">
-                <NavLink to="#" className="dropdown-toggle" data-toggle="dropdown">
+                <NavLink
+                  to="#"
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                >
                   PC Computers
                 </NavLink>
                 <div className="dropdown-menu">
@@ -93,7 +100,11 @@ const navbar = () => {
                 </div>
               </li>
               <li className="dropdown">
-                <NavLink to="#" className="dropdown-toggle" data-toggle="dropdown">
+                <NavLink
+                  to="#"
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                >
                   Laptops &amp; Notebooks
                 </NavLink>
                 <div className="dropdown-menu">
@@ -119,7 +130,11 @@ const navbar = () => {
                 </div>
               </li>
               <li className="dropdown">
-                <NavLink to="#" className="dropdown-toggle" data-toggle="dropdown">
+                <NavLink
+                  to="#"
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                >
                   Mobiles &amp; Tablet
                 </NavLink>
                 <div className="dropdown-menu">

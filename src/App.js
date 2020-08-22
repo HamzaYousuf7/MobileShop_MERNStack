@@ -12,6 +12,7 @@ import UserLogOrSing from "./containers/UserLogOrSing/UserLogOrSing";
 import UserCart from "./containers/UserCart/UserCart";
 import ContactUs from "./containers/ContactUs/ContactUs";
 import ProductDetails from "./containers/ProductDetails/ProductDetails";
+import AdminAddnewProd from "./containers/Admin/AdminAddnewProd/AdminAddnewProp";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           path="/productDetails/:productID"
           component={ProductDetails}
         />
+        <Route exact path="/admin/addNewProduct" component={AdminAddnewProd} />
         <Route component={PageNotFound} />
       </Switch>
       <Footer />
