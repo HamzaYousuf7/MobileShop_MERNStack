@@ -1,5 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#HIDING APP .js
+/backend/app.js
+/backend/upload
+
 # dependencies
 /node_modules
 /.pnp
