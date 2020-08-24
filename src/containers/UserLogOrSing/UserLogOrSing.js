@@ -9,6 +9,7 @@ const UserLogOrSing = () => {
   let loginFormHTML = null;
   let singupFormHTML = null;
 
+  //! STATE BEGIN
   const [isLoginFormValid, setisLoginFormValid] = useState(false);
   const [isSingupFormValid, setisSingupFormValid] = useState(false);
   const [loginForm, setloginForm] = useState({
@@ -127,34 +128,18 @@ const UserLogOrSing = () => {
       isTouched: false,
       invalidMessage: "",
     },
-    gender: {
-      elementType: "radio",
-      elementConfig: {
-        type: "radio",
-        name: "gender",
-        id: "gender",
-      },
-      value: "male",
-      validation: {},
-      isValid: false,
-      isTouched: false,
-      invalidMessage: "",
-    },
-    isAgree: {
-      elementType: "checkbox",
-      elementConfig: {
-        type: "checkbox",
-        name: "gender",
-        id: "gender",
-      },
-      value: "male",
-      validation: {},
-      isValid: false,
-      isTouched: false,
-      invalidMessage: "",
-    },
+  });
+  const [singupFormGender, setsingupFormGender] = useState({
+    value: "",
+    isValid: false,
   });
 
+  const [isAgreeState, setisAgree] = useState({
+    value: false,
+    isValid: false,
+  });
+
+  //!function start
   const inputValidation = (value, rules) => {
     let isValid = true;
     let invalidMessage = "";
@@ -249,10 +234,29 @@ const UserLogOrSing = () => {
     setisLoginFormValid(false);
   };
 
+  //handling gender and i agree option
+  const genderHandler = (event) => {
+    //console.log(event.target.value);
+    setsingupFormGender({
+      value: event.target.value,
+      isValid: true,
+    });
+  };
+
+  const isAgreeHandler = (event) => {
+    //console.log(event.target.checked);
+
+    const isAgree = event.target.checked;
+    setisAgree({
+      value: isAgree,
+      isValid: isAgree,
+    });
+  };
+
   const submitSingupFormHandler = (event) => {
     event.preventDefault();
-    let sendToServer = {};
-
+    let sendToServer = {gender: singupFormGender.value};
+    
     for (let obj in singupForm) {
       sendToServer[obj] = singupForm[obj].value;
     }
@@ -308,6 +312,39 @@ const UserLogOrSing = () => {
             invalidMessage={formElement.config.invalidMessage}
           />
         ))}
+
+        {addtionalText[6] && (
+          <div className="form-group">
+            <input
+              name="gender"
+              onChange={genderHandler}
+              type="radio"
+              value="male"
+            />
+            Male
+            <input
+              name="gender"
+              onChange={genderHandler}
+              style={{ marginLeft: "10px" }}
+              type="radio"
+              value="female"
+            />
+            Female
+          </div>
+        )}
+        {addtionalText[6] && (
+          <div className="form-group">
+            <input
+              name="agree"
+              id="agree"
+              type="checkbox"
+              value="true"
+              onChange={isAgreeHandler}
+            />{" "}
+            I agree to your website.
+          </div>
+        )}
+
         <div className="form-group">
           <button
             type="submit"
@@ -342,7 +379,8 @@ const UserLogOrSing = () => {
     isSingupFormValid,
     "Create",
     setsingupForm,
-    setisSingupFormValid
+    setisSingupFormValid,
+    true
   );
   return (
     <div id="page-content" className="single-page">

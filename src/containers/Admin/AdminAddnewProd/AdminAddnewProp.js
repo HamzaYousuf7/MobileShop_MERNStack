@@ -321,7 +321,7 @@ const AdminAddnewProd = () => {
               <img src={singleImg} width="150px" height="100px" key={index} />
             ))}
 
-          {isValidImagesPick && <h3>SORRY YOU HAVE TO PICKED 4 IMAGES </h3>}
+          {isValidImagesPick && <h3> YOU HAVE TO PICKED 4 IMAGES NO MORE NO LESS</h3>}
         </div>
       </div>
 
