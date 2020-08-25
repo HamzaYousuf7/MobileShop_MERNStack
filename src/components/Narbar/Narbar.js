@@ -12,7 +12,7 @@ const navbar = () => {
             <div className="col-xs-6">
               <ul className="top-link">
                 <li>
-                  <NavLink to="/admin/addNewProduct">
+                  <NavLink to="/admin/showAllProducts">
                     <span className="glyphicon glyphicon-user"></span> My TEST
                   </NavLink>
                   <NavLink to="/userLogOrSing">

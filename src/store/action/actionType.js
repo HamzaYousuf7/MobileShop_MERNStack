@@ -1,0 +1,7 @@
+export const GET_ALL_DATA_START = "GET_ALL_DATA_START";
+export const GET_ALL_DATA_SUCCESS = "GET_ALL_DATA_SUCCESS";
+export const GET_ALL_DATA_FAILED = "GET_ALL_DATA_FAILED";
+
+
+//
+export const IS_LOADING = "IS_LOADING";
