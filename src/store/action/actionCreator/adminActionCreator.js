@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as actionType from "./actionType";
+import * as actionType from "../actionType/adminActionType";
 
 const URL =`http://localhost:5000/api/product`;
 

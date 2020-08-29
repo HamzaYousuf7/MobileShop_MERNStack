@@ -1,10 +1,10 @@
-import * as actionType from "../action/actionType";
+import * as actionType from "../action/actionType/adminActionType";
 
 const INIT_STATE = {
   products: [],
   isLoading: false,
-  errorMessage: "",
   isError: false,
+  errorMessage: "",
   responseMessage: "",
 };
 

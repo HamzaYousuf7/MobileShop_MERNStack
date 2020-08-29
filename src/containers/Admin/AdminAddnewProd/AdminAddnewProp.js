@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
+import * as actionCreator from "../../../store/action/actionCreator/adminActionCreator";
+
 import Input from "../../../components/UI/Input/Input";
-import * as actionCreator from "../../../store/action/actionCreator";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Modal from "../../../components/UI/Modal/Modal";
 
@@ -410,10 +411,10 @@ const AdminAddnewProd = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.isLoading,
-    errorMessage: state.errorMessage,
-    isError: state.isError,
-    responseMessage: state.responseMessage,
+    isLoading: state.adminReducer.isLoading,
+    errorMessage: state.adminReducer.errorMessage,
+    isError: state.adminReducer.isError,
+    responseMessage: state.adminReducer.responseMessage,
   };
 };
 

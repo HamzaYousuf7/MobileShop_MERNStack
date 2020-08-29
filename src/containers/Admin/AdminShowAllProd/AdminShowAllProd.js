@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import * as actionCreator from "../../../store/action/actionCreator";
+import * as actionCreator from "../../../store/action/actionCreator/adminActionCreator";
+
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Modal from "../../../components/UI/Modal/Modal";
 
@@ -102,11 +103,11 @@ const AdminShowAllProd = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
-    isLoading: state.isLoading,
-    errorMessage: state.errorMessage,
-    isError: state.isError,
-    responseMessage: state.responseMessage,
+    products: state.adminReducer.products,
+    isLoading: state.adminReducer.isLoading,
+    errorMessage: state.adminReducer.errorMessage,
+    isError: state.adminReducer.isError,
+    responseMessage: state.adminReducer.responseMessage,
   };
 };
 

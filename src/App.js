@@ -3,7 +3,6 @@ import { Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Narbar/Narbar";
 import Footer from "./components/Footer/Footer";
-import "./App.css";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import MoreStuff from "./components/MoreStuff/MoreStuff";
 import Home from "./containers/Home/Home";
@@ -14,6 +13,8 @@ import ContactUs from "./containers/ContactUs/ContactUs";
 import ProductDetails from "./containers/ProductDetails/ProductDetails";
 import AdminAddnewProd from "./containers/Admin/AdminAddnewProd/AdminAddnewProp";
 import AdminShowAllProd from "./containers/Admin/AdminShowAllProd/AdminShowAllProd";
+
+import "./App.css";
 
 function App() {
   return (
