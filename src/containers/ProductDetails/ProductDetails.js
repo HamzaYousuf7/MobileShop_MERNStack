@@ -39,13 +39,13 @@ const ProductDetails = (props) => {
             <div className="col-lg-12">
               <ul className="breadcrumb">
                 <li>
-                  <Link to="index.html">Home</Link>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <Link to="category.html">Category</Link>
+                  <Link to="/products">Category</Link>
                 </li>
                 <li>
-                  <Link to="#">{props.singleProduct?.name}</Link>
+                  <Link >{props.singleProduct?.name}</Link>
                 </li>
               </ul>
             </div>
@@ -66,7 +66,7 @@ const ProductDetails = (props) => {
                     <div className="image-more">
                       <ul className="row">
                         <li className="col-lg-3 col-sm-3 col-xs-4">
-                          <Link to="#">
+                          <Link >
                             <img
                               className="img-responsive"
                               alt="more pic"
@@ -77,7 +77,7 @@ const ProductDetails = (props) => {
                           </Link>
                         </li>
                         <li className="col-lg-3 col-sm-3 col-xs-4">
-                          <Link to="#">
+                          <Link >
                           <img
                               className="img-responsive"
                               alt="more pic"
@@ -88,7 +88,7 @@ const ProductDetails = (props) => {
                           </Link>
                         </li>
                         <li className="col-lg-3 col-sm-3 col-xs-4">
-                          <Link to="#">
+                          <Link >
                           <img
                               className="img-responsive"
                               alt="more pic"
@@ -99,7 +99,7 @@ const ProductDetails = (props) => {
                           </Link>
                         </li>
                         <li className="col-lg-3 col-sm-3 col-xs-4">
-                          <Link to="#">
+                          <Link >
                           <img
                               className="img-responsive"
                               alt="more pic"
@@ -149,13 +149,13 @@ const ProductDetails = (props) => {
 
                     <div className="share well">
                       <strong>Share :</strong>
-                      <Link to="#" className="share-btn" target="_blank">
+                      <Link  className="share-btn" target="_blank">
                         <i className="fa fa-twitter"></i>
                       </Link>
-                      <Link to="#" className="share-btn" target="_blank">
+                      <Link  className="share-btn" target="_blank">
                         <i className="fa fa-facebook"></i>
                       </Link>
-                      <Link to="#" className="share-btn" target="_blank">
+                      <Link  className="share-btn" target="_blank">
                         <i className="fa fa-linkedin"></i>
                       </Link>
                     </div>
@@ -212,25 +212,25 @@ const ProductDetails = (props) => {
                   <div className="col-lg-4 col-md-4 col-xs-12">
                     <div className="product">
                       <div className="image">
-                        <Link to="product.html">
+                        <Link >
                           <img src={tempImg} alt="nothing" />
                         </Link>
                       </div>
                       <div className="buttons">
-                        <Link className="btn cart" to="#">
+                        <Link className="btn cart" >
                           <span className="glyphicon glyphicon-shopping-cart"></span>
                         </Link>
-                        <Link className="btn wishlist" to="#">
+                        <Link className="btn wishlist" >
                           <span className="glyphicon glyphicon-heart"></span>
                         </Link>
-                        <Link className="btn compare" to="#">
+                        <Link className="btn compare" >
                           <span className="glyphicon glyphicon-transfer"></span>
                         </Link>
                       </div>
                       <div className="caption">
                         <div className="name">
                           <h3>
-                            <Link to="product.html">Aliquam erat volutpat</Link>
+                            <Link >Aliquam erat volutpat</Link>
                           </h3>
                         </div>
                         <div className="price">
@@ -249,25 +249,25 @@ const ProductDetails = (props) => {
                   <div className="col-lg-4 col-md-4 col-xs-12">
                     <div className="product">
                       <div className="image">
-                        <Link to="product.html">
+                        <Link >
                           <img src={tempImg} alt="nothing" />
                         </Link>
                       </div>
                       <div className="buttons">
-                        <Link className="btn cart" to="#">
+                        <Link className="btn cart" >
                           <span className="glyphicon glyphicon-shopping-cart"></span>
                         </Link>
-                        <Link className="btn wishlist" to="#">
+                        <Link className="btn wishlist" >
                           <span className="glyphicon glyphicon-heart"></span>
                         </Link>
-                        <Link className="btn compare" to="#">
+                        <Link className="btn compare" >
                           <span className="glyphicon glyphicon-transfer"></span>
                         </Link>
                       </div>
                       <div className="caption">
                         <div className="name">
                           <h3>
-                            <Link to="product.html">Aliquam erat volutpat</Link>
+                            <Link >Aliquam erat volutpat</Link>
                           </h3>
                         </div>
                         <div className="price">
@@ -286,25 +286,25 @@ const ProductDetails = (props) => {
                   <div className="col-lg-4 col-md-4 col-xs-12">
                     <div className="product">
                       <div className="image">
-                        <Link to="product.html">
+                        <Link >
                           <img src={tempImg} alt="nothing" />
                         </Link>
                       </div>
                       <div className="buttons">
-                        <Link className="btn cart" to="#">
+                        <Link className="btn cart" >
                           <span className="glyphicon glyphicon-shopping-cart"></span>
                         </Link>
-                        <Link className="btn wishlist" to="#">
+                        <Link className="btn wishlist" >
                           <span className="glyphicon glyphicon-heart"></span>
                         </Link>
-                        <Link className="btn compare" to="#">
+                        <Link className="btn compare" >
                           <span className="glyphicon glyphicon-transfer"></span>
                         </Link>
                       </div>
                       <div className="caption">
                         <div className="name">
                           <h3>
-                            <Link to="product.html">Aliquam erat volutpat</Link>
+                            <Link >Aliquam erat volutpat</Link>
                           </h3>{" "}
                         </div>
                         <div className="price">

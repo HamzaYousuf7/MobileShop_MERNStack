@@ -2,7 +2,7 @@ import * as actionType from "../action/actionType/productActionType";
 
 const INIT_STATE = {
   products: [],
-  singleProduct:null,
+  singleProduct: null,
   isLoading: false,
   isError: false,
   errorMessage: "",
@@ -27,6 +27,23 @@ const reducer = (state = INIT_STATE, action) => {
       };
     //when fetch single product failed
     case actionType.FETCH_SINGLE_PRODUCT_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.errorMessage,
+      };
+    //fetching home product success
+    case actionType.FETCH_HOME_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        products: action.products,
+        errorMessage: "",
+      };
+    //when fetch single product failed
+    case actionType.FETCH_HOME_PRODUCTS_FAILED:
       return {
         ...state,
         isLoading: false,

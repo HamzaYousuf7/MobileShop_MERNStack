@@ -9,6 +9,7 @@ const is_loading = () => {
   };
 };
 
+//! fetching single product
 export const fetch_single_product_success = (singleProduct) => {
   return {
     type: actionType.FETCH_SINGLE_PRODUCT_SUCCESS,
@@ -36,5 +37,37 @@ export const get_single_product = (productID) => {
         console.log("error me kia he", error.message);
         dispatch(fetch_single_product_failed(error.message));
       });
+  };
+};
+
+//!fetching home products
+
+export const fetch_home_products_start = () => {
+  return (dispatch) => {
+    dispatch(is_loading());
+    axios
+      .get(URL + `?isHomePage=true`)
+      .then((res) => {
+        console.log("res from the server home product",res.data.products);
+        dispatch(fetch_home_products_success(res.data.products))
+      })
+      .catch((error) => {
+        console.log("Error occur when fetching home product", error);
+        dispatch(fetch_home_products_failed(error.message))
+      });
+  };
+};
+
+export const fetch_home_products_success = (products) => {
+  return {
+    type: actionType.FETCH_HOME_PRODUCTS_SUCCESS,
+    products: products,
+  };
+};
+
+export const fetch_home_products_failed = (errorMessage) => {
+  return {
+    type: actionType.FETCH_SINGLE_PRODUCT_FAILED,
+    errorMessage: errorMessage,
   };
 };
