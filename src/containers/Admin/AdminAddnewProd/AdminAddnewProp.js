@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import Input from "../../../components/UI/Input/Input";
+import * as actionCreator from "../../../store/action/actionCreator";
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import Modal from "../../../components/UI/Modal/Modal";
 
-const AdminAddnewProd = () => {
+const AdminAddnewProd = (props) => {
   const [addNewProdForm, setaddNewProdForm] = useState({
     name: {
       elementType: "input",
@@ -119,17 +123,54 @@ const AdminAddnewProd = () => {
   const [addtionalImgPreview, setaddtionalImgPreview] = useState([]);
   const [isAddNewProdValid, setisaddNewProdValid] = useState(false);
   const [isValidImagesPick, setisValidImagesPick] = useState(false);
+  const [isModelOpenS, setisModelOpenS] = useState(true);
 
   //function
   const addNewProductrHandler = (event) => {
     event.preventDefault();
-    let tempObj = {};
+    let tempObj = {
+      mainImg: mainImg.value,
+      additionalImages: additionalImages.value,
+    };
     for (let formElementIdentifier in addNewProdForm) {
       tempObj[formElementIdentifier] =
         addNewProdForm[formElementIdentifier].value;
     }
 
     console.log("TEMP obj me kia he ", tempObj);
+
+    // now converting the form to formDATA
+    const formData = new FormData();
+
+    for (const key in tempObj) {
+      if (key === "additionalImages") {
+        // !append multilple time
+        for (let singleImg of tempObj.additionalImages) {
+          formData.append("additionalImages", singleImg);
+        }
+      } else {
+        formData.append(key, tempObj[key]);
+      }
+    }
+    props.addNewProduct(formData);
+    console.log("form data additionalImages", formData.get("additionalImages"));
+
+    //Resetting the form
+    //! RESETTING THE FORM VALUE
+    const tempForm = {};
+    for (let formElementIdentifier in addNewProdForm) {
+      tempForm[formElementIdentifier] = addNewProdForm[formElementIdentifier];
+      tempForm[formElementIdentifier].value = "";
+      tempForm[formElementIdentifier].touched = false;
+      tempForm[formElementIdentifier].valid = false;
+    }
+    setaddNewProdForm(tempForm);
+    setisaddNewProdValid(false);
+    setPreviewUrl(null);
+    setaddtionalImgPreview(null);
+    setisValidImagesPick(null);
+    setmainImg({ value: null, isValid: false });
+    setadditionalImages({ value: null, isValid: false });
   };
 
   const inputValidation = (value, rules) => {
@@ -269,6 +310,10 @@ const AdminAddnewProd = () => {
     fileReader3.readAsDataURL(images[3]);
   };
 
+  const closedModalHandler = () => {
+    setisModelOpenS(false);
+  };
+
   //CREATING FORM
   const tempARR = [];
   for (let key in addNewProdForm) {
@@ -321,7 +366,9 @@ const AdminAddnewProd = () => {
               <img src={singleImg} width="150px" height="100px" key={index} />
             ))}
 
-          {isValidImagesPick && <h3> YOU HAVE TO PICKED 4 IMAGES NO MORE NO LESS</h3>}
+          {isValidImagesPick && (
+            <h3> YOU HAVE TO PICKED 4 IMAGES NO MORE NO LESS</h3>
+          )}
         </div>
       </div>
 
@@ -340,10 +387,41 @@ const AdminAddnewProd = () => {
   );
   return (
     <div className="container">
-      <h1>ADD NEW PRODUCT:</h1>
-      {AddProductsForm}
+      {props.isError && (
+        <Modal show={isModelOpenS} modalClosed={closedModalHandler}>
+          {props.errorMessage}
+        </Modal>
+      )}
+      {props.isLoading === true ? <Spinner /> : null}
+      {props.isLoading === false && props.isError === false ? (
+        <React.Fragment>
+          {props.responseMessage && (
+            <Modal show={isModelOpenS} modalClosed={closedModalHandler}>
+              {props.responseMessage}
+            </Modal>
+          )}
+          <h1>ADD NEW PRODUCT:</h1>
+          {AddProductsForm}
+        </React.Fragment>
+      ) : null}
     </div>
   );
 };
 
-export default AdminAddnewProd;
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.isLoading,
+    errorMessage: state.errorMessage,
+    isError: state.isError,
+    responseMessage: state.responseMessage,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewProduct: (formData) =>
+      dispatch(actionCreator.add_new_product_start(formData)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddnewProd);

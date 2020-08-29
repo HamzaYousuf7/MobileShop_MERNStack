@@ -31,6 +31,7 @@ function App() {
           path="/productDetails/:productID"
           component={ProductDetails}
         />
+        <Route exact path="/admin/addProduct" component={AdminAddnewProd} />
         <Route exact path="/admin/showAllProducts" component={AdminShowAllProd} />
         <Route component={PageNotFound} />
       </Switch>
