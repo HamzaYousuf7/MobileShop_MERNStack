@@ -41,13 +41,32 @@ const reducer = (state = INIT_STATE, action) => {
         responseMessage: action.responseMessage,
         errorMessage: "",
       };
-    //when admin add new produc failed
+    //when admin add new product failed
     case actionType.ADD_NEW_PRODUCT_FAILED:
       return {
         ...state,
         isLoading: false,
         isError: true,
         errorMessage: action.errorMessage,
+        responseMessage: "",
+      };
+    //WHen admin  delete  product successfully
+    case actionType.DELETE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        responseMessage: action.responseMessage,
+        errorMessage: "",
+      };
+    //when admin delete product failed
+    case actionType.DELETE_PRODUCT_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.errorMessage,
+        responseMessage: "",
       };
 
     default:

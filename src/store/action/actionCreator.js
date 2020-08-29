@@ -69,3 +69,34 @@ export const add_new_product_failed = (errorMessage) => {
     errorMessage: errorMessage,
   };
 };
+
+//DELETE product
+export const  delete_product_start= (productID) => {
+  return (dispatch) => {
+    dispatch(is_loading());
+    axios
+      .delete(URL+`/${productID}`)
+      .then((res) => {
+        console.log("Res From the server", res.data);
+        dispatch(delete_product_success(res.data.message));
+      })
+      .catch((error) => {
+        console.log("error me kia he", error.message);
+        dispatch(delete_product_failed(error.message));
+      });
+  };
+};
+
+export const delete_product_success = (responseMessage) => {
+  return {
+    type: actionType.DELETE_PRODUCT_SUCCESS,
+    responseMessage: responseMessage,
+  };
+};
+
+export const delete_product_failed = (errorMessage) => {
+  return {
+    type: actionType.DELETE_PRODUCT_FAILED,
+    errorMessage: errorMessage,
+  };
+};
