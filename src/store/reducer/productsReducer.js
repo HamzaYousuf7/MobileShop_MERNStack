@@ -5,6 +5,7 @@ const INIT_STATE = {
   singleProduct: null,
   isLoading: false,
   isError: false,
+  maxProductCount: 0,
   errorMessage: "",
   responseMessage: "",
 };
@@ -50,7 +51,22 @@ const reducer = (state = INIT_STATE, action) => {
         isError: true,
         errorMessage: action.errorMessage,
       };
-
+    //when we fetch product for product comp
+    case actionType.FETCH_ALL_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        products: action.products,
+        isLoading: false,
+        isError: false,
+        maxProductCount: action.maxProductCount,
+      };
+    case actionType.FETCH_ALL_PRODUCTS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.errorMessage,
+      };
     default:
       return state;
   }

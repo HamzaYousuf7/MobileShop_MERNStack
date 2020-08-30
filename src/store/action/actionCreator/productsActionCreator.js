@@ -48,12 +48,12 @@ export const fetch_home_products_start = () => {
     axios
       .get(URL + `?isHomePage=true`)
       .then((res) => {
-        console.log("res from the server home product",res.data.products);
-        dispatch(fetch_home_products_success(res.data.products))
+        console.log("res from the server home product", res.data.products);
+        dispatch(fetch_home_products_success(res.data.products));
       })
       .catch((error) => {
         console.log("Error occur when fetching home product", error);
-        dispatch(fetch_home_products_failed(error.message))
+        dispatch(fetch_home_products_failed(error.message));
       });
   };
 };
@@ -69,5 +69,46 @@ export const fetch_home_products_failed = (errorMessage) => {
   return {
     type: actionType.FETCH_SINGLE_PRODUCT_FAILED,
     errorMessage: errorMessage,
+  };
+};
+
+//! fetch all products
+
+export const fetch_all_products_start = (pageSize, currentPage) => {
+  return (dispatch) => {
+    dispatch(is_loading());
+    axios
+      .get(URL + `?pageSize=${pageSize}&currentPage=${currentPage}`)
+      .then((res) => {
+        console.log("res when fetch all produc ", res.data);
+        dispatch(
+          fetch_all_products_success(
+            res.data.products,
+            res.data.maxProductCount
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(
+          "error occur when try to fetch all products",
+          error.message
+        );
+        dispatch(fetch_all_products_failed(error.message));
+      });
+  };
+};
+
+const fetch_all_products_success = (products, maxProductCount) => {
+  return {
+    type: actionType.FETCH_ALL_PRODUCTS_SUCCESS,
+    products,
+    maxProductCount,
+  };
+};
+
+const fetch_all_products_failed = (errorMessage) => {
+  return {
+    type: actionType.FETCH_ALL_PRODUCTS_FAILED,
+    errorMessage,
   };
 };
