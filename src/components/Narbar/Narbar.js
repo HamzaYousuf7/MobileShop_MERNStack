@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
+import * as actionCreator from "../../store/action/actionCreator/userActionCreator";
 import mainLogo from "../../assets/images/logo.png";
-const navbar = () => {
+
+const Navbar = (props) => {
   return (
     <React.Fragment>
       <nav id="top">
@@ -15,10 +18,16 @@ const navbar = () => {
                   <NavLink to="/productDetails/5f4a44b559e63f057c401020">
                     <span className="glyphicon glyphicon-user"></span> My TEST
                   </NavLink>
-                  <NavLink to="/userLogOrSing">
-                    <span className="glyphicon glyphicon-user"></span> My
-                    Account
-                  </NavLink>
+                  {props.isAuthenticated ? (
+                    <a onClick={props.logout}>
+                      <span className="glyphicon glyphicon-user"></span> Logout
+                    </a>
+                  ) : (
+                    <NavLink to="/userLogOrSing">
+                      <span className="glyphicon glyphicon-user"></span> My
+                      Account
+                    </NavLink>
+                  )}
                 </li>
                 <li>
                   <NavLink to="/contactus">
@@ -204,4 +213,15 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.userReducer.isAuthenticated,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(actionCreator.logout_start()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

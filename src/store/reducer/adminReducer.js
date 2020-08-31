@@ -10,7 +10,7 @@ const INIT_STATE = {
 
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
-    case actionType.IS_LOADING:
+    case actionType.ADMIN_IS_LOADING:
       return {
         ...state,
         isLoading: true,

@@ -5,7 +5,7 @@ const URL =`http://localhost:5000/api/product`;
 
 const is_loading = () => {
   return {
-    type: actionType.IS_LOADING,
+    type: actionType.ADMIN_IS_LOADING,
   };
 };
 

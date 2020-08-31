@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
+import * as actionCreator from "../../store/action/actionCreator/userActionCreator";
 import Input from "../../components/UI/Input/Input";
 import { printMessage } from "../../components/util/printConsoleMessage";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import Modal from "../../components/UI/Modal/Modal";
 
-const UserLogOrSing = () => {
+const UserLogOrSing = (props) => {
   //VAR DEC
   let loginFormHTML = null;
   let singupFormHTML = null;
 
   //! STATE BEGIN
   const [isLoginFormValid, setisLoginFormValid] = useState(false);
+  const [isModelOpenS, setisModelOpenS] = useState(true);
   const [isSingupFormValid, setisSingupFormValid] = useState(false);
   const [loginForm, setloginForm] = useState({
     email: {
@@ -166,10 +171,10 @@ const UserLogOrSing = () => {
     }
 
     if (rules.isPassword) {
-      const pattern = /^[A-Za-z0-9]\w{6,14}$/;
+      const pattern = /^[A-Za-z0-9]\w{5,14}$/;
       isValid = pattern.test(value) && isValid;
       invalidMessage =
-        "Can be Character and Digits and min lenght is 7 Character and max 14";
+        "Can be Character and Digits and min lenght is 6 Character and max 14";
     }
 
     return [isValid, invalidMessage];
@@ -222,7 +227,8 @@ const UserLogOrSing = () => {
       sendToServer[obj] = loginForm[obj].value;
     }
     printMessage("server ke object me kia aya ", sendToServer);
-
+    //calling the backend
+    props.login(sendToServer);
     //RESETTING FIELDS
     let tempObj = { ...loginForm };
     for (let obj in tempObj) {
@@ -255,8 +261,8 @@ const UserLogOrSing = () => {
 
   const submitSingupFormHandler = (event) => {
     event.preventDefault();
-    let sendToServer = {gender: singupFormGender.value};
-    
+    let sendToServer = { gender: singupFormGender.value };
+
     for (let obj in singupForm) {
       sendToServer[obj] = singupForm[obj].value;
     }
@@ -362,6 +368,13 @@ const UserLogOrSing = () => {
     return tempForm;
   };
 
+  const closedModalHandler = () => {
+    setisModelOpenS(false);
+    if (props.isAuthenticated) {
+      props.history.replace("/");
+    }
+  };
+
   loginFormHTML = converForm(
     loginForm,
     submitLoginFormHandler,
@@ -384,37 +397,61 @@ const UserLogOrSing = () => {
   );
   return (
     <div id="page-content" className="single-page">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <ul className="breadcrumb">
-              <li>
-                <Link to="index.html">Home</Link>
-              </li>
-              <li>
-                <Link to="account.html">Account</Link>
-              </li>
-            </ul>
+      {/**SHOWIG SPINNER */}
+      {props.isLoading && <Spinner />}
+
+      {/** SHOWING MODEL */}
+      {props.responseMessage && (
+        <Modal show={isModelOpenS} modalClosed={closedModalHandler}>
+          {props.responseMessage}
+        </Modal>
+      )}
+      {!props.isLoading && (
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <ul className="breadcrumb">
+                <li>
+                  <Link to="index.html">Home</Link>
+                </li>
+                <li>
+                  <Link to="account.html">Account</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="heading">
+                <h2>Login</h2>
+              </div>
+              {loginFormHTML}
+              <Link to="#">Forgot Your Password ?</Link>
+            </div>
+            <div className="col-md-6">
+              <div className="heading">
+                <h2>New User ? Create An Account.</h2>
+              </div>
+              {singupFormHTML}
+            </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-6">
-            <div className="heading">
-              <h2>Login</h2>
-            </div>
-            {loginFormHTML}
-            <Link to="#">Forgot Your Password ?</Link>
-          </div>
-          <div className="col-md-6">
-            <div className="heading">
-              <h2>New User ? Create An Account.</h2>
-            </div>
-            {singupFormHTML}
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default UserLogOrSing;
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.userReducer.isLoading,
+    responseMessage: state.userReducer.responseMessage,
+    isAuthenticated: state.userReducer.isAuthenticated,
+  };
+};
+
+const mapDispatchToProps = (disptach) => {
+  return {
+    login: (userData) => disptach(actionCreator.login_start(userData)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UserLogOrSing);

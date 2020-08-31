@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Navbar from "./components/Narbar/Narbar";
 import Footer from "./components/Footer/Footer";
@@ -14,9 +15,14 @@ import ProductDetails from "./containers/ProductDetails/ProductDetails";
 import AdminAddnewProd from "./containers/Admin/AdminAddnewProd/AdminAddnewProp";
 import AdminShowAllProd from "./containers/Admin/AdminShowAllProd/AdminShowAllProd";
 
+import * as actionCreator from "./store/action/actionCreator/userActionCreator";
+
 import "./App.css";
 
-function App() {
+const App = (props) => {
+  useEffect(() => {
+    props.autoLogin();
+  }, []);
   return (
     <React.Fragment>
       <Navbar />
@@ -33,12 +39,21 @@ function App() {
           component={ProductDetails}
         />
         <Route exact path="/admin/addProduct" component={AdminAddnewProd} />
-        <Route exact path="/admin/showAllProducts" component={AdminShowAllProd} />
+        <Route
+          exact
+          path="/admin/showAllProducts"
+          component={AdminShowAllProd}
+        />
         <Route component={PageNotFound} />
       </Switch>
       <Footer />
     </React.Fragment>
   );
-}
+};
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    autoLogin: () => dispatch(actionCreator.autoLogin()),
+  };
+};
+export default connect(null, mapDispatchToProps)(App);

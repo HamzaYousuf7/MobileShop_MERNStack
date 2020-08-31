@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 
 import adminReducer from "./store/reducer/adminReducer";
 import productsReducer from "./store/reducer/productsReducer";
+import userReducer from "./store/reducer/userReducer";
 
 import App from "./App";
 import "./index.css";
@@ -26,6 +27,7 @@ const logger = (store) => {
 const rootReducer = combineReducers({
   adminReducer: adminReducer,
   productsReducer: productsReducer,
+  userReducer: userReducer,
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
