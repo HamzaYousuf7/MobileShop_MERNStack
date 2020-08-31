@@ -46,7 +46,26 @@ const reducer = (state = INIT_STATE, action) => {
         isAuthenticated: false,
         responseMessage: "",
       };
-
+    case actionType.SINGUP_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        errorMessage: "",
+        token: action.token,
+        isAuthenticated: true,
+        responseMessage: action.responseMessage,
+      };
+    case actionType.SINGUP_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: "",
+        token: null,
+        isAuthenticated: false,
+        responseMessage: action.responseMessage,
+      };
     default:
       return state;
   }

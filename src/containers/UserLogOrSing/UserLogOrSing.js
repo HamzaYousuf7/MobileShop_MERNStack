@@ -53,7 +53,7 @@ const UserLogOrSing = (props) => {
   });
 
   const [singupForm, setsingupForm] = useState({
-    firstName: {
+    firstname: {
       elementType: "input",
       elementConfig: {
         type: "text",
@@ -69,7 +69,7 @@ const UserLogOrSing = (props) => {
       isTouched: false,
       invalidMessage: "",
     },
-    lastName: {
+    lastname: {
       elementType: "input",
       elementConfig: {
         type: "text",
@@ -101,7 +101,7 @@ const UserLogOrSing = (props) => {
       isTouched: false,
       invalidMessage: "",
     },
-    passowrd: {
+    password: {
       elementType: "input",
       elementConfig: {
         type: "password",
@@ -267,7 +267,8 @@ const UserLogOrSing = (props) => {
       sendToServer[obj] = singupForm[obj].value;
     }
     printMessage("server ke object me kia aya ", sendToServer);
-
+    props.singup(sendToServer);
+    
     //RESETTING FIELDS
     let tempObj = { ...singupForm };
     for (let obj in tempObj) {
@@ -452,6 +453,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (disptach) => {
   return {
     login: (userData) => disptach(actionCreator.login_start(userData)),
+    singup : (singupData)=> disptach(actionCreator.singup_start(singupData))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(UserLogOrSing);

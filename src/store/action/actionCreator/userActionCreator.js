@@ -47,8 +47,42 @@ const login_failed = (errorMessage) => {
   };
 };
 
-//logout start
+//SINGUP START
+export const singup_start = (singupData) => {
+  return (dispatch) => {
+    dispatch(is_loading());
+    axios
+      .post(URL + `/singup`, singupData)
+      .then((res) => {
+        console.log(res.data);
+        const expiresIn = res.data.expiresIn;
+        const now = new Date();
+        const expirationDate = now.getTime() + expiresIn * 1000;
+        saveAuthData(res.data.token, expirationDate);
+        dispatch(singup_successfull(res.data.token,res.data.message))
+      })
+      .catch((error) => {
+        console.log("error when singup", error);
+        dispatch(singup_failed("Something went wrong"))
+      });
+  };
+};
 
+const singup_successfull = (token, responseMessage) => {
+  return {
+    type: actionType.SINGUP_SUCCESS,
+    token,
+    responseMessage,
+  };
+};
+
+const singup_failed = (errorMessage) => {
+  return {
+    type: actionType.SINGUP_FAILED,
+    errorMessage,
+  };
+};
+//logout start
 export const logout_start = () => {
   return (dispatch) => {
     dispatch(is_loading());
@@ -66,7 +100,7 @@ const logout_successfull = () => {
 //SAVING TOKEN IN LOCAL storage
 const saveAuthData = (token, expirationDate) => {
   localStorage.setItem("token", token);
-  localStorage.setItem("expirationDate", expirationDate.toISOString());
+  localStorage.setItem("expirationDate", new Date(expirationDate).toISOString());
 };
 
 //clearing TOKEN IN LOCAL storage
@@ -110,6 +144,6 @@ export const autoLogin = () => {
 
 const setAuthTimer = (duration) => {
   setTimeOut = setTimeout(() => {
-    logout_successfull();
+    //TODO CHECK ITS IMPLEMENTATION
   }, duration * 1000);
 };
