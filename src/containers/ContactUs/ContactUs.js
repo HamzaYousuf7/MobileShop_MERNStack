@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {Link} from "react-router-dom";
 import { printMessage } from "../../components/util/printConsoleMessage";
 import Input from "../../components/UI/Input/Input";
 
@@ -248,10 +248,10 @@ const ContactUs = () => {
           <div className="col-lg-12">
             <ul className="breadcrumb">
               <li>
-                <a href="index.html">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <Link to="/contactus">Contact</Link>
               </li>
             </ul>
           </div>

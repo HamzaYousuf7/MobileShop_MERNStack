@@ -413,10 +413,10 @@ const UserLogOrSing = (props) => {
             <div className="col-lg-12">
               <ul className="breadcrumb">
                 <li>
-                  <Link to="index.html">Home</Link>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <Link to="account.html">Account</Link>
+                  <Link to="/userLogOrSing">Account</Link>
                 </li>
               </ul>
             </div>
