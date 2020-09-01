@@ -13,5 +13,8 @@ export const FETCH_ALL_PRODUCTS_START = "FETCH_ALL_PRODUCTS_START";
 export const FETCH_ALL_PRODUCTS_SUCCESS = "FETCH_ALL_PRODUCTS_SUCCESS";
 export const FETCH_ALL_PRODUCTS_FAILED = "FETCH_ALL_PRODUCTS_FAILED";
 
+//adding product into cart
+export const ADD_PRODUCT_IN_CART = "ADD_PRODUCT_IN_CART";
+
 //house keeping stuff
 export const PRODUCTS_IS_LOADING = "IS_LOADING";

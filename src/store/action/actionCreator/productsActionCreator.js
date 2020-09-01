@@ -112,3 +112,11 @@ const fetch_all_products_failed = (errorMessage) => {
     errorMessage,
   };
 };
+
+//adding product into cart
+export const adding_product_in_cart = (product) => {
+  return {
+    type: actionType.ADD_PRODUCT_IN_CART,
+    product,
+  };
+};

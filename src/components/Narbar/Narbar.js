@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -6,6 +6,11 @@ import * as actionCreator from "../../store/action/actionCreator/userActionCreat
 import mainLogo from "../../assets/images/logo.png";
 
 const Navbar = (props) => {
+  const [itemInCart, setitemInCart] = useState(0);
+
+  useEffect(() => {
+    setitemInCart(props.itemsInCart.length);
+  }, [props.itemsInCart.length]);
   return (
     <React.Fragment>
       <nav id="top">
@@ -60,7 +65,7 @@ const Navbar = (props) => {
             <div id="cart">
               <NavLink className="btn btn-1" to="/userCart">
                 <span className="glyphicon glyphicon-shopping-cart"></span>CART
-                : 0 ITEM
+                : {itemInCart} ITEM
               </NavLink>
             </div>
           </div>
@@ -216,6 +221,7 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.userReducer.isAuthenticated,
+    itemsInCart: state.productsReducer.userCart,
   };
 };
 

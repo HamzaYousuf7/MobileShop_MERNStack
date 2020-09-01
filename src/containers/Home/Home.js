@@ -32,6 +32,27 @@ const Home = (props) => {
   const calculateDiscountPrice = (orgPrice) => {
     return orgPrice - 100;
   };
+
+  const addingToCart = ({
+    _id,
+    name,
+    brandName,
+    price,
+    mainImg,
+    availableColor,
+  }) => {
+    console.log({ _id, name, brandName, price, mainImg, availableColor });
+
+    props.addToCart({
+      _id,
+      name,
+      brandName,
+      price,
+      mainImg,
+      availableColor,
+      quantity: 1,
+    });
+  };
   return (
     <div id="page-content" className="home-page">
       {props.isLoading === true ? <Spinner /> : null}
@@ -75,9 +96,12 @@ const Home = (props) => {
                           </Link>
                         </div>
                         <div className="buttons">
-                          <Link className="btn cart" to="#">
+                          <a
+                            className="btn cart"
+                            onClick={() => addingToCart(singleProd)}
+                          >
                             <span className="glyphicon glyphicon-shopping-cart"></span>
-                          </Link>
+                          </a>
                           <Link className="btn wishlist" to="#">
                             <span className="glyphicon glyphicon-heart"></span>
                           </Link>
@@ -207,6 +231,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchHomeProducts: () =>
       dispatch(actionCreator.fetch_home_products_start()),
+    addToCart: (product) =>
+      dispatch(actionCreator.adding_product_in_cart(product)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
