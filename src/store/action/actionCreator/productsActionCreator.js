@@ -120,3 +120,15 @@ export const adding_product_in_cart = (product) => {
     product,
   };
 };
+
+
+//checkout start
+
+export const checkout_start = (order)=>{
+  return dispatch=>{
+    //dispatch(is_loading());
+    axios.post("http://localhost:5000/api/cart/placeOrder",order).then(res=>{
+      console.log(res)
+    })
+  }
+}

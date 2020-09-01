@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import tempImg from "../../assets/images/galaxy-note.jpg";
+import * as actionCreator from "../../store/action/actionCreator/productsActionCreator";
 
 const UserCart = (props) => {
   const [userCartProd, setuserCartProd] = useState([]);
@@ -31,6 +31,11 @@ const UserCart = (props) => {
       orderProducts: updateFieldsArr,
       totalPrice: totalPrice,
     });
+    props.checkoutStart({
+      userID,
+      orderProducts: updateFieldsArr,
+      totalPrice: totalPrice,
+    })
   };
   return (
     <div id="page-content" className="single-page">
@@ -165,4 +170,10 @@ const mapStateToProps = (state) => {
     userID: state.userReducer.userID,
   };
 };
-export default connect(mapStateToProps)(UserCart);
+
+const mapDispatchToProps = dispatch=>{
+  return{
+    checkoutStart:(order)=> dispatch(actionCreator.checkout_start(order))
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(UserCart);

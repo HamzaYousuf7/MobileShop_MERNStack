@@ -16,5 +16,10 @@ export const FETCH_ALL_PRODUCTS_FAILED = "FETCH_ALL_PRODUCTS_FAILED";
 //adding product into cart
 export const ADD_PRODUCT_IN_CART = "ADD_PRODUCT_IN_CART";
 
+//checkout start
+export const CHECKOUT_START ="CHECKOUT_START";
+export const CHECKOUT_SUCCESS ="CHECKOUT_SUCCESS";
+export const CHECKOUT_FAILED ="CHECKOUT_FAILED";
+
 //house keeping stuff
 export const PRODUCTS_IS_LOADING = "IS_LOADING";
