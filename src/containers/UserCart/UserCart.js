@@ -11,6 +11,11 @@ const UserCart = (props) => {
     setuserCartProd(props.userCart);
     settotalPrice(props.totalPrice);
   }, []);
+
+  const checkout = () => {
+    //TODO
+    alert("CALL HTTP SERVICE HERE");
+  };
   return (
     <div id="page-content" className="single-page">
       <div className="container">
@@ -103,9 +108,9 @@ const UserCart = (props) => {
                     </tr>
                   </table>
                   <center>
-                    <Link to="#" className="btn btn-1">
+                    <a onClick={checkout} className="btn btn-1">
                       Checkout
-                    </Link>
+                    </a>
                   </center>
                 </div>
               </div>

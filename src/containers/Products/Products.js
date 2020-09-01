@@ -57,6 +57,25 @@ const Products = (props) => {
     return orgPrice - 100;
   };
 
+  const addingToCart = ({
+    _id,
+    name,
+    brandName,
+    price,
+    mainImg,
+    availableColor,
+  }) => {
+    props.addToCart({
+      _id,
+      name,
+      brandName,
+      price,
+      mainImg,
+      availableColor,
+      quantity: 1,
+    });
+  };
+
   return (
     <div id="page-content" className="single-page">
       {props.isLoading === true ? <Spinner /> : null}
@@ -100,9 +119,9 @@ const Products = (props) => {
                               </Link>
                             </div>
                             <div className="buttons">
-                              <Link className="btn cart" to="/moreStuff">
+                              <a className="btn cart"  onClick={() => addingToCart(singleProd)}>
                                 <span className="glyphicon glyphicon-shopping-cart"></span>
-                              </Link>
+                              </a>
                               <Link className="btn wishlist" to="/moreStuff">
                                 <span className="glyphicon glyphicon-heart"></span>
                               </Link>
@@ -164,9 +183,9 @@ const Products = (props) => {
                               </Link>
                             </div>
                             <div className="buttons">
-                              <Link className="btn cart" to="/moreStuff">
+                              <a className="btn cart"  onClick={() => addingToCart(singleProd)}>
                                 <span className="glyphicon glyphicon-shopping-cart"></span>
-                              </Link>
+                              </a>
                               <Link className="btn wishlist" to="/moreStuff">
                                 <span className="glyphicon glyphicon-heart"></span>
                               </Link>
@@ -228,9 +247,9 @@ const Products = (props) => {
                               </Link>
                             </div>
                             <div className="buttons">
-                              <Link className="btn cart" to="/moreStuff">
+                              <a className="btn cart"  onClick={() => addingToCart(singleProd)}>
                                 <span className="glyphicon glyphicon-shopping-cart"></span>
-                              </Link>
+                              </a>
                               <Link className="btn wishlist" to="/moreStuff">
                                 <span className="glyphicon glyphicon-heart"></span>
                               </Link>
@@ -460,6 +479,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllProducs: (pageSize, currentPage) =>
       dispatch(actionCreator.fetch_all_products_start(pageSize, currentPage)),
+    addToCart: (product) =>
+      dispatch(actionCreator.adding_product_in_cart(product)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

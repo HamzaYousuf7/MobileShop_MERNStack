@@ -41,8 +41,6 @@ const Home = (props) => {
     mainImg,
     availableColor,
   }) => {
-    console.log({ _id, name, brandName, price, mainImg, availableColor });
-
     props.addToCart({
       _id,
       name,
@@ -174,9 +172,12 @@ const Home = (props) => {
                           </Link>
                         </div>
                         <div className="buttons">
-                          <Link className="btn cart" to="#">
+                          <a
+                            className="btn cart"
+                            onClick={() => addingToCart(singleProd)}
+                          >
                             <span className="glyphicon glyphicon-shopping-cart"></span>
-                          </Link>
+                          </a>
                           <Link className="btn wishlist" to="#">
                             <span className="glyphicon glyphicon-heart"></span>
                           </Link>
