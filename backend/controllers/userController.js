@@ -81,7 +81,12 @@ exports.userLogin = async (req, res, next) => {
 
   res
     .status(200)
-    .json({ message: "successfully login", token, expiresIn: 3600 });
+    .json({
+      message: "successfully login",
+      token,
+      userID: loginUser._id,
+      expiresIn: 3600,
+    });
 };
 
 exports.userSingup = async (req, res, next) => {
@@ -176,6 +181,7 @@ exports.userSingup = async (req, res, next) => {
   res.status(200).json({
     message: "Created new user Successfully",
     token,
-    expiresIn: 3600
+    userID: resultOfSave._id,
+    expiresIn: 3600,
   });
 };

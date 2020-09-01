@@ -2,6 +2,7 @@ import * as actionType from "../action/actionType/userActionType";
 
 const INIT_STATE = {
   token: null,
+  userID: null,
   isLoading: false,
   isError: false,
   isAuthenticated: false,
@@ -25,6 +26,7 @@ const reducer = (state = INIT_STATE, action) => {
         token: action.token,
         isAuthenticated: true,
         responseMessage: action.responseMessage,
+        userID: action.userID,
       };
     case actionType.LOGIN_FAILED:
       return {
@@ -35,6 +37,7 @@ const reducer = (state = INIT_STATE, action) => {
         token: null,
         isAuthenticated: false,
         responseMessage: "",
+        userID: null,
       };
     case actionType.LOGOUT_SUCCESSFULL:
       return {
@@ -45,6 +48,7 @@ const reducer = (state = INIT_STATE, action) => {
         token: null,
         isAuthenticated: false,
         responseMessage: "",
+        userID: null,
       };
     case actionType.SINGUP_SUCCESS:
       return {
@@ -55,6 +59,7 @@ const reducer = (state = INIT_STATE, action) => {
         token: action.token,
         isAuthenticated: true,
         responseMessage: action.responseMessage,
+        userID: action.userID,
       };
     case actionType.SINGUP_FAILED:
       return {
@@ -65,6 +70,7 @@ const reducer = (state = INIT_STATE, action) => {
         token: null,
         isAuthenticated: false,
         responseMessage: action.responseMessage,
+        userID: null,
       };
     default:
       return state;

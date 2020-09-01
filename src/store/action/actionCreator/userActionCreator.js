@@ -22,8 +22,10 @@ export const login_start = (userData) => {
         //now all the time calculation
         const now = new Date();
         const expirationDate = new Date(now.getTime() + expiresIn * 1000);
-        saveAuthData(res.data.token, expirationDate);
-        dispatch(login_success(res.data.token, res.data.message));
+        saveAuthData(res.data.token, expirationDate, res.data.userID);
+        dispatch(
+          login_success(res.data.token, res.data.message, res.data.userID)
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -32,11 +34,12 @@ export const login_start = (userData) => {
   };
 };
 
-const login_success = (token, responseMessage) => {
+const login_success = (token, responseMessage, userID) => {
   return {
     type: actionType.LOGIN_SUCCESS,
     token,
     responseMessage,
+    userID,
   };
 };
 
@@ -58,21 +61,22 @@ export const singup_start = (singupData) => {
         const expiresIn = res.data.expiresIn;
         const now = new Date();
         const expirationDate = now.getTime() + expiresIn * 1000;
-        saveAuthData(res.data.token, expirationDate);
-        dispatch(singup_successfull(res.data.token,res.data.message))
+        saveAuthData(res.data.token, expirationDate, res.data.userID);
+        dispatch(singup_successfull(res.data.token, res.data.message,res.data.userID));
       })
       .catch((error) => {
         console.log("error when singup", error);
-        dispatch(singup_failed("Something went wrong"))
+        dispatch(singup_failed("Something went wrong"));
       });
   };
 };
 
-const singup_successfull = (token, responseMessage) => {
+const singup_successfull = (token, responseMessage,userID) => {
   return {
     type: actionType.SINGUP_SUCCESS,
     token,
     responseMessage,
+    userID
   };
 };
 
@@ -85,7 +89,6 @@ const singup_failed = (errorMessage) => {
 //logout start
 export const logout_start = () => {
   return (dispatch) => {
-    dispatch(is_loading());
     dispatch(logout_successfull());
   };
 };
@@ -98,28 +101,35 @@ const logout_successfull = () => {
 };
 
 //SAVING TOKEN IN LOCAL storage
-const saveAuthData = (token, expirationDate) => {
+const saveAuthData = (token, expirationDate, userID) => {
   localStorage.setItem("token", token);
-  localStorage.setItem("expirationDate", new Date(expirationDate).toISOString());
+  localStorage.setItem(
+    "expirationDate",
+    new Date(expirationDate).toISOString()
+  );
+  localStorage.setItem("userID", userID);
 };
 
 //clearing TOKEN IN LOCAL storage
 const clearAuthData = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
+  localStorage.removeItem("userID");
 };
 
 const getAuthData = () => {
   const token = localStorage.getItem("token");
+  const userID = localStorage.getItem("userID");
   const expidationDateLocal = localStorage.getItem("expirationDate");
 
-  if (!token || !expidationDateLocal) {
+  if (!token || !expidationDateLocal || !userID) {
     return;
   }
 
   return {
     token,
     expirationDate: new Date(expidationDateLocal),
+    userID,
   };
 };
 
@@ -136,12 +146,15 @@ export const autoLogin = () => {
     console.log("woring", authInformation.expirationDate);
     if (expiresIn > 0) {
       console.log("woring", expiresIn);
-      dispatch(login_success(authInformation.token, ""));
-      setAuthTimer(expiresIn / 1000);
+      dispatch(
+        login_success(authInformation.token, "", authInformation.userID)
+      );
+      //setAuthTimer(expiresIn / 1000);
     }
   };
 };
 
+//TODO AUTO LOGOUT FUNC kar le agar krna he 
 const setAuthTimer = (duration) => {
   setTimeOut = setTimeout(() => {
     //TODO CHECK ITS IMPLEMENTATION

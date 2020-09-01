@@ -27,7 +27,7 @@ export const get_all_data_start = () => {
   return (dispatch) => {
     dispatch(is_loading());
     axios
-      .get("http://localhost:5000/api/product?isHomePage=true")
+      .get("http://localhost:5000/api/product?isAdmin=true")
       .then((res) => {
         console.log("Res From the server", res.data);
         dispatch(get_all_data_success(res.data.products));

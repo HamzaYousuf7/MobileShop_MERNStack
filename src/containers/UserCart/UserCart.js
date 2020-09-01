@@ -13,8 +13,24 @@ const UserCart = (props) => {
   }, []);
 
   const checkout = () => {
-    //TODO
-    alert("CALL HTTP SERVICE HERE");
+    const tempArr = [...userCartProd];
+    const userID = props.userID;
+    const updateFieldsArr = tempArr.map((singleProd) => {
+      return {
+        productID: singleProd._id,
+        name: singleProd.name,
+        brandName: singleProd.brandName,
+        price: singleProd.price,
+        quantity: singleProd.quantity,
+        availableColor: singleProd.availableColor,
+      };
+    });
+
+    console.log("final obj for cart", {
+      userID,
+      orderProducts: updateFieldsArr,
+      totalPrice: totalPrice,
+    });
   };
   return (
     <div id="page-content" className="single-page">
@@ -87,30 +103,43 @@ const UserCart = (props) => {
               <div className="pricedetails">
                 <div className="col-md-4 col-md-offset-8">
                   <table>
-                    <h6>Price Details</h6>
-                    <tr>
-                      <td>Total</td>
-                      <td>{totalPrice}</td>
-                    </tr>
-                    <tr>
-                      <td>Discount</td>
-                      <td>-----</td>
-                    </tr>
-                    <tr>
-                      <td>Delivery Charges</td>
-                      <td>100.00</td>
-                    </tr>
-                    <tr style={{ borderTop: "1px solid #333" }}>
-                      <td>
-                        <h5>TOTAL</h5>
-                      </td>
-                      <td>{totalPrice + 100}</td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <h6>Price Details</h6>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td>{totalPrice}</td>
+                      </tr>
+                      <tr>
+                        <td>Discount</td>
+                        <td>-----</td>
+                      </tr>
+                      <tr>
+                        <td>Delivery Charges</td>
+                        <td>100.00</td>
+                      </tr>
+                      <tr style={{ borderTop: "1px solid #333" }}>
+                        <td>
+                          <h5>TOTAL</h5>
+                        </td>
+                        <td>{totalPrice + 100}</td>
+                      </tr>
+                    </tbody>
                   </table>
                   <center>
-                    <a onClick={checkout} className="btn btn-1">
-                      Checkout
-                    </a>
+                    {/** condtionally showing what  */}
+                    {props.isAuthenticated ? (
+                      <a onClick={checkout} className="btn btn-1">
+                        Checkout
+                      </a>
+                    ) : (
+                      <Link to="/userLogOrSing" className="btn btn-1">
+                        Sing up or login to place order
+                      </Link>
+                    )}
                   </center>
                 </div>
               </div>
@@ -132,6 +161,8 @@ const mapStateToProps = (state) => {
   return {
     userCart: state.productsReducer.userCart,
     totalPrice: state.productsReducer.totalPrice,
+    isAuthenticated: state.userReducer.isAuthenticated,
+    userID: state.userReducer.userID,
   };
 };
 export default connect(mapStateToProps)(UserCart);
