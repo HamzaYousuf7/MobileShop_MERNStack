@@ -20,9 +20,6 @@ const Navbar = (props) => {
             <div className="col-xs-6">
               <ul className="top-link">
                 <li>
-                  <NavLink to="/productDetails/5f4a44b559e63f057c401020">
-                    <span className="glyphicon glyphicon-user"></span> My TEST
-                  </NavLink>
                   {props.isAuthenticated ? (
                     <a onClick={props.logout}>
                       <span className="glyphicon glyphicon-user"></span> Logout

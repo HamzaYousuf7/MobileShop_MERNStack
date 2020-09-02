@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import footerLogo from "../../assets/images/logofooter.png";
 import paymentMethodPic2 from "../../assets/images/paypal-curved-32px.png";
 import paymentMethodPic1 from "../../assets/images/visa-curved-32px.png";
 import paymentMethodPic3 from "../../assets/images/discover-curved-32px.png";
 import paymentMethodPic4 from "../../assets/images/maestro-curved-32px.png";
+import * as actionCreator from "../../store/action/actionCreator/adminActionCreator";
 
-const footer = () => {
+const Footer = (props) => {
   return (
     <footer>
       <div className="container">
@@ -27,9 +29,6 @@ const footer = () => {
               </div>
               <ul>
                 <li>
-                  <Link to="/moreStuff">About Us</Link>
-                </li>
-                <li>
                   <Link to="/moreStuff">Delivery Information</Link>
                 </li>
                 <li>
@@ -41,6 +40,23 @@ const footer = () => {
                 <li>
                   <Link to="/moreStuff">Contact Us</Link>
                 </li>
+                {props.isAuth ? (
+                  <React.Fragment>
+                    <li>
+                      <a onClick={() => props.logout()}>ADMIN (LOGOUT)</a>
+                    </li>
+                    <li>
+                    <Link to="/admin/showAllProducts">ADMIN (SHOW ALL PRODUCT)</Link>
+                    </li>
+                    <li>
+                    <Link to="/admin/addNewProduct">ADMIN (ADD PRODUCT)</Link>
+                    </li>
+                  </React.Fragment>
+                ) : (
+                  <li>
+                    <Link to="/admin/login">ADMIN (LOGIN)</Link>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="col-md-3 col-footer footer-3">
@@ -133,4 +149,16 @@ const footer = () => {
   );
 };
 
-export default footer;
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.adminReducer.isAuth,
+  };
+};
+
+const mapDispatchToPorps = (dispatch) => {
+  return {
+    logout: () => dispatch(actionCreator.admin_logout_start()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToPorps)(Footer);

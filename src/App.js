@@ -14,10 +14,12 @@ import ContactUs from "./containers/ContactUs/ContactUs";
 import ProductDetails from "./containers/ProductDetails/ProductDetails";
 import AdminAddnewProd from "./containers/Admin/AdminAddnewProd/AdminAddnewProp";
 import AdminShowAllProd from "./containers/Admin/AdminShowAllProd/AdminShowAllProd";
+import AdminLogin from "./containers/Admin/AdminLogin/AdminLogin";
 
 import * as actionCreator from "./store/action/actionCreator/userActionCreator";
 
 import "./App.css";
+
 
 const App = (props) => {
   useEffect(() => {
@@ -38,7 +40,8 @@ const App = (props) => {
           path="/productDetails/:productID"
           component={ProductDetails}
         />
-        <Route exact path="/admin/addProduct" component={AdminAddnewProd} />
+         <Route exact path="/admin/login" component={AdminLogin} />
+        <Route exact path="/admin/addNewProduct" component={AdminAddnewProd} />
         <Route
           exact
           path="/admin/showAllProducts"

@@ -6,6 +6,8 @@ const INIT_STATE = {
   isError: false,
   errorMessage: "",
   responseMessage: "",
+  token: null,
+  isAuth: false,
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -67,6 +69,36 @@ const reducer = (state = INIT_STATE, action) => {
         isError: true,
         errorMessage: action.errorMessage,
         responseMessage: "",
+      };
+    case actionType.ADMIN_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        errorMessage: "",
+        responseMessage: action.responseMessage,
+        token: action.token,
+        isAuth: true,
+      };
+    case actionType.ADMIN_LOGIN_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        token: null,
+        responseMessage: "",
+        isError: true,
+        errorMessage: action.errorMessage,
+        isAuth: false,
+      };
+    case actionType.ADMIN_LOGOUT:
+      return {
+        ...state,
+        isLoading: false,
+        token: null,
+        responseMessage: "",
+        isError: false,
+        errorMessage: "",
+        isAuth: false,
       };
 
     default:
