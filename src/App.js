@@ -20,14 +20,15 @@ import * as actionCreator from "./store/action/actionCreator/userActionCreator";
 
 import "./App.css";
 
-
 const App = (props) => {
   useEffect(() => {
     props.autoLogin();
   }, []);
-  return (
-    <React.Fragment>
-      <Navbar />
+
+  let routes;
+
+  if (props.isAuth) {
+    routes = (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/products" component={Products} />
@@ -40,7 +41,6 @@ const App = (props) => {
           path="/productDetails/:productID"
           component={ProductDetails}
         />
-         <Route exact path="/admin/login" component={AdminLogin} />
         <Route exact path="/admin/addNewProduct" component={AdminAddnewProd} />
         <Route
           exact
@@ -49,14 +49,43 @@ const App = (props) => {
         />
         <Route component={PageNotFound} />
       </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/contactus" component={ContactUs} />
+        <Route exact path="/userLogOrSing" component={UserLogOrSing} />
+        <Route exact path="/userCart" component={UserCart} />
+        <Route exact path="/moreStuff" component={MoreStuff} />
+        <Route
+          exact
+          path="/productDetails/:productID"
+          component={ProductDetails}
+        />
+        <Route exact path="/admin/login" component={AdminLogin} />
+        <Route component={PageNotFound} />
+      </Switch>
+    );
+  }
+  return (
+    <React.Fragment>
+      <Navbar />
+      {routes}
       <Footer />
     </React.Fragment>
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.adminReducer.isAuth,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     autoLogin: () => dispatch(actionCreator.autoLogin()),
   };
 };
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

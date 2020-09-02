@@ -71,13 +71,13 @@ const AdminShowAllProd = (props) => {
                         <button
                           style={{ marginRight: "10px" }}
                           type="button"
-                          class="btn btn-warning btn-lg"
+                          className="btn btn-warning btn-lg"
                         >
                           UPDATE
                         </button>
                         <button
                           type="button"
-                          class="btn btn-danger btn-lg"
+                          className="btn btn-danger btn-lg"
                           onClick={() => props.deleteProduct(singlePro._id)}
                         >
                           DELETE

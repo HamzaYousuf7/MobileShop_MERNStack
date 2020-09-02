@@ -43,7 +43,7 @@ const Footer = (props) => {
                 {props.isAuth ? (
                   <React.Fragment>
                     <li>
-                      <a onClick={() => props.logout()}>ADMIN (LOGOUT)</a>
+                      <Link to="#" onClick={() => props.logout()}>ADMIN (LOGOUT)</Link>
                     </li>
                     <li>
                     <Link to="/admin/showAllProducts">ADMIN (SHOW ALL PRODUCT)</Link>
