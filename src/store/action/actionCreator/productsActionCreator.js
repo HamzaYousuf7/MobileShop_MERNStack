@@ -30,11 +30,11 @@ export const get_single_product = (productID) => {
     axios
       .get(URL + `/${productID}`)
       .then((res) => {
-        console.log("Res From the server", res.data);
+        //console.log("Res From the server", res.data);
         dispatch(fetch_single_product_success(res.data.product));
       })
       .catch((error) => {
-        console.log("error me kia he", error.message);
+        //console.log("error me kia he", error.message);
         dispatch(fetch_single_product_failed(error.message));
       });
   };
@@ -48,11 +48,11 @@ export const fetch_home_products_start = () => {
     axios
       .get(URL + `?isHomePage=true`)
       .then((res) => {
-        console.log("res from the server home product", res.data.products);
+       // console.log("res from the server home product", res.data.products);
         dispatch(fetch_home_products_success(res.data.products));
       })
       .catch((error) => {
-        console.log("Error occur when fetching home product", error);
+        //console.log("Error occur when fetching home product", error);
         dispatch(fetch_home_products_failed(error.message));
       });
   };
@@ -80,7 +80,7 @@ export const fetch_all_products_start = (pageSize, currentPage) => {
     axios
       .get(URL + `?pageSize=${pageSize}&currentPage=${currentPage}`)
       .then((res) => {
-        console.log("res when fetch all produc ", res.data);
+        //console.log("res when fetch all produc ", res.data);
         dispatch(
           fetch_all_products_success(
             res.data.products,
@@ -89,10 +89,10 @@ export const fetch_all_products_start = (pageSize, currentPage) => {
         );
       })
       .catch((error) => {
-        console.log(
-          "error occur when try to fetch all products",
-          error.message
-        );
+        // console.log(
+        //   "error occur when try to fetch all products",
+        //   error.message
+        // );
         dispatch(fetch_all_products_failed(error.message));
       });
   };
@@ -121,14 +121,25 @@ export const adding_product_in_cart = (product) => {
   };
 };
 
-
 //checkout start
 
-export const checkout_start = (order)=>{
-  return dispatch=>{
-    //dispatch(is_loading());
-    axios.post("http://localhost:5000/api/cart/placeOrder",order).then(res=>{
-      console.log(res)
-    })
-  }
-}
+export const checkout_start = (order) => {
+  return (dispatch) => {
+    dispatch(is_loading());
+    axios
+      .post("http://localhost:5000/api/cart/placeOrder", order)
+      .then((res) => {
+       // console.log(res);
+        dispatch(checkout_success(res.data.message));
+      }).catch(error=>{
+       // console.log("error occur when try to cart",error)
+      });
+  };
+};
+
+const checkout_success = (responseMessage) => {
+  return {
+    type: actionType.CHECKOUT_SUCCESS,
+    responseMessage,
+  };
+};

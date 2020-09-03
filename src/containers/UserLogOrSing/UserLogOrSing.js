@@ -226,7 +226,7 @@ const UserLogOrSing = (props) => {
     for (let obj in loginForm) {
       sendToServer[obj] = loginForm[obj].value;
     }
-    printMessage("server ke object me kia aya ", sendToServer);
+    //printMessage("server ke object me kia aya ", sendToServer);
     //calling the backend
     props.login(sendToServer);
     //RESETTING FIELDS
@@ -266,7 +266,7 @@ const UserLogOrSing = (props) => {
     for (let obj in singupForm) {
       sendToServer[obj] = singupForm[obj].value;
     }
-    printMessage("server ke object me kia aya ", sendToServer);
+    //printMessage("server ke object me kia aya ", sendToServer);
     props.singup(sendToServer);
     
     //RESETTING FIELDS

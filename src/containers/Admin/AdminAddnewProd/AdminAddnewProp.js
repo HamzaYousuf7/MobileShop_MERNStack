@@ -138,7 +138,7 @@ const AdminAddnewProd = (props) => {
         addNewProdForm[formElementIdentifier].value;
     }
 
-    console.log("TEMP obj me kia he ", tempObj);
+    //console.log("TEMP obj me kia he ", tempObj);
 
     // now converting the form to formDATA
     const formData = new FormData();
@@ -154,7 +154,7 @@ const AdminAddnewProd = (props) => {
       }
     }
     props.addNewProduct(formData);
-    console.log("form data additionalImages", formData.get("additionalImages"));
+    //console.log("form data additionalImages", formData.get("additionalImages"));
 
     //Resetting the form
     //! RESETTING THE FORM VALUE
@@ -236,7 +236,7 @@ const AdminAddnewProd = (props) => {
     let formIsValid = isAddNewProdValid;
     let mainImgValid = mainImg.isValid;
     let addtionalImgValid = additionalImages.isValid;
-    console.log(formIsValid, mainImgValid, addtionalImgValid);
+    //console.log(formIsValid, mainImgValid, addtionalImgValid);
     for (let inputIdentifier in addNewProdForm) {
       formIsValid =
         addNewProdForm[inputIdentifier].isValid &&
@@ -244,7 +244,7 @@ const AdminAddnewProd = (props) => {
         mainImgValid &&
         addtionalImgValid;
     }
-    console.log(formIsValid);
+    //console.log(formIsValid);
     setisaddNewProdValid(formIsValid);
   };
   //!handling main Image
@@ -263,7 +263,7 @@ const AdminAddnewProd = (props) => {
 
   const additionalImagesHandler = (event) => {
     const images = event.target.files;
-    console.log(images, images.length);
+    //console.log(images, images.length);
     if (images.length != 4) {
       setisValidImagesPick(true);
       updateFormValidiry(); //updating validity
@@ -305,7 +305,7 @@ const AdminAddnewProd = (props) => {
     fileReader3.onload = () => {
       tempArr.push(fileReader3.result);
       setaddtionalImgPreview(tempArr);
-      console.log("array me kia a rha after reading multiple images", tempArr);
+      //console.log("array me kia a rha after reading multiple images", tempArr);
     };
 
     fileReader3.readAsDataURL(images[3]);

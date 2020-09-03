@@ -162,7 +162,7 @@ const ContactUs = () => {
     for (let obj in contactusFormState) {
       sendToServer[obj] = contactusFormState[obj].value;
     }
-    printMessage("server ke object me kia aya ", sendToServer);
+    //printMessage("server ke object me kia aya ", sendToServer);
 
     //RESETTING FIELDS
     let tempObj = { ...contactusFormState };

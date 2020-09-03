@@ -17,7 +17,7 @@ export const login_start = (userData) => {
     axios
       .post(URL + `/login`, userData)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         const expiresIn = res.data.expiresIn;
         //now all the time calculation
         const now = new Date();
@@ -28,7 +28,7 @@ export const login_start = (userData) => {
         );
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
         dispatch(login_failed("SOmething when worng"));
       });
   };
@@ -57,7 +57,7 @@ export const singup_start = (singupData) => {
     axios
       .post(URL + `/singup`, singupData)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         const expiresIn = res.data.expiresIn;
         const now = new Date();
         const expirationDate = now.getTime() + expiresIn * 1000;
@@ -65,7 +65,7 @@ export const singup_start = (singupData) => {
         dispatch(singup_successfull(res.data.token, res.data.message,res.data.userID));
       })
       .catch((error) => {
-        console.log("error when singup", error);
+        //console.log("error when singup", error);
         dispatch(singup_failed("Something went wrong"));
       });
   };
@@ -143,9 +143,9 @@ export const autoLogin = () => {
 
     const now = new Date();
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
-    console.log("woring", authInformation.expirationDate);
+    //console.log("woring", authInformation.expirationDate);
     if (expiresIn > 0) {
-      console.log("woring", expiresIn);
+      //console.log("woring", expiresIn);
       dispatch(
         login_success(authInformation.token, "", authInformation.userID)
       );

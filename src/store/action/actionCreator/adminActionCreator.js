@@ -29,11 +29,11 @@ export const get_all_data_start = () => {
     axios
       .get("http://localhost:5000/api/product?isAdmin=true")
       .then((res) => {
-        console.log("Res From the server", res.data);
+        //console.log("Res From the server", res.data);
         dispatch(get_all_data_success(res.data.products));
       })
       .catch((error) => {
-        console.log("error me kia he", error.message);
+        //console.log("error me kia he", error.message);
         dispatch(get_all_data_failed(error.message));
       });
   };
@@ -46,11 +46,11 @@ export const add_new_product_start = (newProduct) => {
     axios
       .post(URL, newProduct)
       .then((res) => {
-        console.log("Res From the server", res.data);
+        //console.log("Res From the server", res.data);
         dispatch(add_new_product_success(res.data.message));
       })
       .catch((error) => {
-        console.log("error me kia he", error.message);
+       // console.log("error me kia he", error.message);
         dispatch(add_new_product_failed(error.message));
       });
   };
@@ -77,11 +77,11 @@ export const delete_product_start = (productID) => {
     axios
       .delete(URL + `/${productID}`)
       .then((res) => {
-        console.log("Res From the server", res.data);
+        //console.log("Res From the server", res.data);
         dispatch(delete_product_success(res.data.message));
       })
       .catch((error) => {
-        console.log("error me kia he", error.message);
+       // console.log("error me kia he", error.message);
         dispatch(delete_product_failed(error.message));
       });
   };
@@ -109,11 +109,11 @@ export const admin_login_start = (adminData) => {
     axios
       .post("http://localhost:5000/api/admin/login", adminData)
       .then((res) => {
-        console.log("what we get when admin login", res);
+       // console.log("what we get when admin login", res);
         dispatch(admin_login_success(res.data.token, res.data.message));
       })
       .catch((error) => {
-        console.log("error occur when admin login", error);
+       // console.log("error occur when admin login", error);
         dispatch(
           admin_login_failed(
             "check email or password or something wet wrong please try again"

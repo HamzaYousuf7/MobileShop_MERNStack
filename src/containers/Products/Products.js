@@ -44,7 +44,7 @@ const Products = (props) => {
   }, [props.allProducts]);
   //function start
   const paginationChangeHandler = (pageNo) => {
-    console.log(pageNo);
+    //console.log(pageNo);
     setpaginationDataState({
       pageSize: 9,
       currentPage: pageNo,

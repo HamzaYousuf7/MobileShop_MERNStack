@@ -12,7 +12,7 @@ const AdminShowAllProd = (props) => {
 
   useEffect(() => {
     fetchData();
-    console.log(props.errorMessage);
+    //console.log(props.errorMessage);
   }, []);
 
   const fetchData = () => {

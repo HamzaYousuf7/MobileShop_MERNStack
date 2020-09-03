@@ -90,11 +90,20 @@ const reducer = (state = INIT_STATE, action) => {
       }
       //updating the price
       tempPrice = tempPrice + (cartProduct.price - 100);
-      console.log("final result of cart func", tempProductArr, tempPrice);
+      //console.log("final result of cart func", tempProductArr, tempPrice);
       return {
         ...state,
         userCart: tempProductArr,
         totalPrice: tempPrice,
+      };
+    case actionType.CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        userCart: [],
+        totalPrice: 0,
+        responseMessage: action.responseMessage,
       };
     default:
       return state;

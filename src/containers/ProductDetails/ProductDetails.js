@@ -9,7 +9,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import Modal from "../../components/UI/Modal/Modal";
 
 const ProductDetails = (props) => {
-  console.log("what props this comp is getting", props);
+  //console.log("what props this comp is getting", props);
 
   const [isModelOpenS, setisModelOpenS] = useState(true);
 
